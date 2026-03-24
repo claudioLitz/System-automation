@@ -4,6 +4,7 @@ import time
 import pandas as pd
 from dotenv import load_dotenv
 import os
+import pyperclip
 
 class AutomationBot:
     
@@ -15,6 +16,9 @@ class AutomationBot:
         self.table = None
         self.email = os.getenv("user_email")
         self.password = os.getenv("user_password")
+        self.total_spent = None
+        self.quantity = None
+        self.average_price = None
 
     def open_chrome(self):
         options = webdriver.ChromeOptions()
@@ -52,13 +56,13 @@ class AutomationBot:
         if self.table is None:
             raise ValueError("Data not loaded. Call load_data() first.")
         
-        total_spent   = self.table["ValorFinal"].sum()
-        quantity      = self.table["Quantidade"].sum()
-        average_price = self.table["ValorUnitário"].mean()
+        self.total_spent   = self.table["ValorFinal"].sum()
+        self.quantity      = self.table["Quantidade"].sum()
+        self.average_price = self.table["ValorUnitário"].mean()
 
-        print(f"Total Spent:   {total_spent}")
-        print(f"Quantity:      {quantity}")
-        print(f"Average Price: {average_price}")
+        print(f"Total Spent:   {self.total_spent}")
+        print(f"Quantity:      {self.quantity}")
+        print(f"Average Price: {self.average_price}")
 
     def SendEmail(self):
         py.PAUSE = 0.5
@@ -84,15 +88,21 @@ class AutomationBot:
         time.sleep(3)
         py.write("henrique_schorck@estudante.sesisenai.org.br")
         py.press(['tab' for _ in range(2)])
-        py.write("Assunto legal")
+        py.write("Cool subject")
         py.press('tab')
-        py.write("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        py.press(['tab','enter'])
+        email_body = f'''
+                Prezado(a) henrique schorck, tudo bem? 
+                Segue relatório completo sobre os dados de compras.
+                Total de gastos: R$ {self.total_spent}
+                Quantidade itens no total: {self.quantity}
+                Tiket médio: R$ {self.average_price}
 
-        # Preencher para
-        # Preencher assunto
-        # preencher corpo do Email
-        # Send Email
+                Fico a disposição.
+                Respeitosamente, Claudio Litz'''
+        
+        pyperclip.copy(email_body)
+        py.hotkey('ctrl','v')
+        py.press(['tab'])
 
     def run(self):
         py.alert("Wait for the program to finish before returning.")
