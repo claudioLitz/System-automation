@@ -23,6 +23,7 @@ class AutomationBot:
         self.browser = webdriver.Chrome(options=options)
         self.browser.get("https://pages.hashtagtreinamentos.com/aula1-intensivao-sistema")
         py.hotkey('win', 'up')
+        time.sleep(2)
 
     def login(self, username: str, password: str):
         py.press('tab')
@@ -76,11 +77,11 @@ class AutomationBot:
         time.sleep(7)
         py.write(self.password)
         py.press('enter')
-        time.sleep(10)
+        time.sleep(15)
 
-        # Clicar escrever       
-        py.click(120,238)
-        time.sleep(1)
+        # Write an email       
+        py.press('c')
+        time.sleep(3)
         py.write("henrique_schorck@estudante.sesisenai.org.br")
         py.press(['tab' for _ in range(2)])
         py.write("Assunto legal")
@@ -106,6 +107,5 @@ class AutomationBot:
         input("Press enter to finish program...")
 
 
-if __name__ == "__main__":
-    bot = AutomationBot()
-    bot.run()
+bot = AutomationBot()
+bot.run()
