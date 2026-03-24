@@ -78,10 +78,10 @@ class AutomationBot:
         py.press('enter')
         time.sleep(10)
 
-        # Clicar escrever
+        # Clicar escrever       
         py.click(120,238)
         time.sleep(1)
-        py.write("henrique_schork@estudante.sesisenai.org.br")
+        py.write("henrique_schorck@estudante.sesisenai.org.br")
         py.press(['tab' for _ in range(2)])
         py.write("Assunto legal")
         py.press('tab')
