@@ -47,7 +47,7 @@ py.alert("Arquivo baixado? ")
 
 # ---------------------------------------- Passo 4 - Calcular os indicadores
 # Importe da base de dados
-tabela = pd.read_csv(r"C:\Users\claudio_litz\Downloads\Compras.csv")
+tabela = pd.read_csv(r"C:\Users\claudio_litz\Downloads\Compras.csv", sep=';')
 print(tabela)
 
 
